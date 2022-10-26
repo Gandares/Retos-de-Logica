@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class Main {
@@ -45,9 +44,7 @@ class CountingWords{
         Words = RemoveSpecialCharacters(Words);
 
         for(int i = 0; i < Words.length; i++){
-            char[] ordenado = SortWord(Words[i]);
-            
-            if(!SameWord(ordenado)){
+            if(!SameWord(Words[i])){
                 Recount.add(new Pair(Words[i], 1));
             }
         }
@@ -69,28 +66,11 @@ class CountingWords{
         return words;
     }
 
-    private char[] SortWord(String word){
-        char[] sorted = new char[word.length()];
-        for(int i = 0; i < word.length(); i++)
-            sorted[i] = word.charAt(i);
-
-        Arrays.sort(sorted);
-        return sorted;
-    }
-
-    private boolean SameWord(char[] ordenado){
+    private boolean SameWord(String ordenado){
         for(int j = 0; j < Recount.size(); j++){
-            char[] RecountWordOrdenada = SortWord(Recount.get(j).getKey());
-            if(RecountWordOrdenada.length == ordenado.length){
-                boolean same = true;
-                for(int k = 0; k < ordenado.length; k++)
-                    if(ordenado[k] != RecountWordOrdenada[k])
-                        same = false;
-
-                if(same == true){
-                    Recount.get(j).add();
-                    return true;
-                }
+            if(ordenado.equals(Recount.get(j).getKey())){
+                Recount.get(j).add();
+                return true;
             }
         }
         return false;
